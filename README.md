@@ -204,6 +204,6 @@ Para preguntas o problemas durante la competencia:
 ---
 
 **Equipo AerodesignMx**  
-*Construido para la Competencia SAE Aerodesign*
+*Construido para la Competencia Aerodesign MX*
 
 ¡Buena suerte con sus vuelos! 🛩️
