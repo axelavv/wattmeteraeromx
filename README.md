@@ -98,23 +98,71 @@ Sample,Timestamp(ms),Voltage(V),Current(A),Power(W)
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Cargar datos (omitir líneas de encabezado)
-data = pd.read_csv('wattmeter_0000.txt', skiprows=4)
+# Cargar datos
+data = pd.read_csv('wattmeter_0002.txt', skiprows=3)
 
-# Graficar potencia vs tiempo
-plt.figure(figsize=(12, 6))
-plt.plot(data['Timestamp(ms)'] / 1000, data['Power(W)'])
-plt.xlabel('Tiempo (segundos)')
-plt.ylabel('Potencia (Watts)')
-plt.title('Consumo de Potencia en el Tiempo')
-plt.grid(True)
-plt.show()
+# Convertir tiempo a segundos
+time_s = data['Timestamp(ms)'] / 1000
+power = data['Power(W)']
 
 # Calcular estadísticas
-print(f"Potencia Promedio: {data['Power(W)'].mean():.2f} W")
-print(f"Potencia Pico: {data['Power(W)'].max():.2f} W")
-print(f"Energía Total: {data['Power(W)'].sum() * 0.1 / 3600:.4f} Wh")
+potencia_promedio = power.mean()
+potencia_pico = power.max()
+energia_total = power.sum() * 0.1 / 3600  # Ajusta si el intervalo no es 0.1 s
+
+# Encontrar índice del pico
+peak_index = power.idxmax()
+peak_time = time_s.iloc[peak_index]
+peak_value = power.iloc[peak_index]
+
+# Crear figura
+fig, ax = plt.subplots(figsize=(12, 6))
+
+# Línea principal
+ax.plot(time_s, power, label='Potencia', linewidth=1.5)
+
+# Línea promedio
+ax.axhline(potencia_promedio, color='orange', linestyle='--',
+           linewidth=2, label=f'Promedio ({potencia_promedio:.2f} W)')
+
+# Marcar pico
+ax.plot(peak_time, peak_value, 'ro', label='Pico')
+ax.annotate(f'{peak_value:.2f} W',
+            xy=(peak_time, peak_value),
+            xytext=(10, 10),
+            textcoords='offset points',
+            arrowprops=dict(arrowstyle='->'),
+            fontsize=10)
+
+# Etiquetas
+ax.set_xlabel('Tiempo (segundos)', fontsize=12)
+ax.set_ylabel('Potencia (Watts)', fontsize=12)
+ax.set_title('Consumo de Potencia en el Tiempo', fontsize=14, fontweight='bold')
+ax.grid(True, linestyle='--', alpha=0.6)
+
+# Caja de estadísticas
+stats_text = (
+    f"Potencia Promedio: {potencia_promedio:.2f} W\n"
+    f"Potencia Pico: {potencia_pico:.2f} W\n"
+    f"Energía Total: {energia_total:.4f} Wh"
+)
+
+ax.text(
+    0.02, 0.98,
+    stats_text,
+    transform=ax.transAxes,
+    fontsize=11,
+    verticalalignment='top',
+    bbox=dict(boxstyle='round', facecolor='white', alpha=0.9)
+)
+
+# Leyenda
+ax.legend()
+
+plt.tight_layout()
+plt.show()
 ```
 
 #### Análisis con MATLAB
