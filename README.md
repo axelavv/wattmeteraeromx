@@ -193,8 +193,6 @@ fprintf('Potencia Pico: %.2f W\n', peak_power);
 
 ### Botón Reset Peaks (Reiniciar Picos)
 - **Función:** Limpia los valores de corriente pico y potencia pico
-- **Acceso:** Protegido por contraseña
-- **Contraseña por Defecto:** `AeroMx2024!`
 - **Caso de Uso:** Reiniciar entre diferentes corridas de prueba
 
 ### Botón Refresh (Actualizar)
