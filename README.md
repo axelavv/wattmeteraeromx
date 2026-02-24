@@ -7,9 +7,9 @@ Un sistema inalámbrico de medición de potencia de alta precisión diseñado pa
 Este wattmeter proporciona monitoreo en tiempo real de voltaje, corriente y potencia con acceso a interfaz web inalámbrica. Perfecto para Aerodesign Mx y análisis de rendimiento de aeronaves RC.
 
 **Especificaciones Clave:**
-- Rango de Voltaje: Hasta 6S LiPo (25.2V máx)
-- Rango de Corriente: Hasta 50A
-- Rango de Potencia: 0-1200W (optimizado para 800-1000W)
+- Rango de Voltaje: 30v
+- Rango de Corriente: Hasta 75A
+- Rango de Potencia: 0-1500W (optimizado para 800-1000W)
 - Tasa de Actualización: 10 muestras por segundo
 
 ## ✨ Características
